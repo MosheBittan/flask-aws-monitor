@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My IP Address</title>
+    <style>
+        body {
+            background-color: #0f172a; /* Dark slate background */
+            color: #f8fafc; /* Light gray text */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #1e293b;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid #334155;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .ip-display {
+            background-color: #0f172a;
+            color: #38bdf8; /* Bright blue for the IP */
+            font-size: 2.5rem;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            word-wrap: break-word;
+        }
+        p {
+            color: #cbd5e1;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Connection Info</h1>
+        <div class="ip-display">
+            <!-- The {{ ip_address }} is where Flask injects the data -->
+            {{ ip_address }}
+        </div>
+        <p>This is your current public-facing or local gateway IP address.</p>
+    </div>
+
+</body>
+</html>
