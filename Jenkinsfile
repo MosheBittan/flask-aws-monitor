@@ -3,7 +3,7 @@
 // include library function
 
 pipeline {
-    any agent
+    agent any
 
     stages{
         stage ('Checkout Code') {
