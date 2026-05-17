@@ -17,7 +17,7 @@ pipeline {
         stage ('Docker Build') {
             steps {
                 script {
-                    sh "docker build -t flask-aws-monitor:latest ."
+                    sh "docker build -t flask-aws-monitor:${env.BUILD_NUMBER} ."
                     // This automatically clones the repo based on the SCM configuration in the UI
                 }
             }
