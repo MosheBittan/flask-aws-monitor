@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }  
-        stage ('SonarQube Scan')
+        stage ('SonarQube Scan') {
             steps {
                 script {
                     codeQuality.sonarCreateProject("testScan")
@@ -30,5 +30,6 @@ pipeline {
                     // sonarqube
                 }
             }  
-    }   
+       }
+    }
 }
