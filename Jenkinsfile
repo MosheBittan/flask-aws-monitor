@@ -2,6 +2,7 @@ def appname = "hello-newapp"
 def repo = "MosheBittan"  // Replace with your DockerHub username
 def appimage = "docker.io/${repo}/${appname}"
 def apptag = "${env.BUILD_NUMBER}"
+def repoName = $repo.toLowerCase()
 
 podTemplate(cloud: 'kubernetes', containers: [
     containerTemplate(
@@ -28,7 +29,7 @@ podTemplate(cloud: 'kubernetes', containers: [
         stage('Hello') {
             container('docker') {
               echo "Building docker image..."
-              sh "docker build -t ${repo}:$apptag ."
+              sh "docker build -t $repoName:$apptag ."
               sh "echo docker push $appimage:$apptag"
               //sh "sleep 180"
             }
