@@ -14,7 +14,14 @@ podTemplate(cloud: 'kubernetes', containers: [
         image: 'docker:26-dind', // Use the latest stable DinD image
         privileged: true,      // Essential for Docker daemon to run
         args: '--storage-driver=vfs' // VFS is safest for K8s, though slower
-    )], 
+    ),
+    containerTemplate(
+        name: 'deployer', 
+        image: 'elevy99927/k8s-deployer:latest', 
+        command: 'cat', 
+        ttyEnabled: true
+    )
+    ], 
   volumes: [
     emptyDirVolume(mountPath: '/var/lib/docker', memory: false) // Q: Why do we need this volume?
   ]) {
@@ -26,11 +33,26 @@ podTemplate(cloud: 'kubernetes', containers: [
           }
         } // end chackout
 
-        stage('Hello') {
+        stage('Build') {
             container('docker') {
               echo "Building docker image..."
               sh "docker build -t $repoName:$apptag ."
               sh "echo docker push $appimage:$apptag"
+              //sh "sleep 180"
+            }
+        } //end hello
+        
+        stage('Push') {
+            container('docker') {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds', 
+                        usernameVariable: 'DH_USER', 
+                        passwordVariable: 'DH_PASS'
+                    )
+                ])
+              echo "Pushing docker image to DockerHUB..."
+              sh "docker push MosheBittan/$appimage:$apptag"
               //sh "sleep 180"
             }
         } //end hello
