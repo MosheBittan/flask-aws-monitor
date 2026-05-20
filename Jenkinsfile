@@ -31,7 +31,7 @@ podTemplate(cloud: 'kubernetes', containers: [
               echo "Building docker image..."
               sh "docker build -t $repoName:$apptag ."
               sh "echo docker push $appimage:$apptag"
-              //sh "sleep 180"
+              sh "sleep 180"
             }
         } //end hello
     }
