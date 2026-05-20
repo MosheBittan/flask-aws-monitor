@@ -52,7 +52,7 @@ podTemplate(cloud: 'kubernetes', containers: [
                     )
                 ]){
               echo "Pushing docker image to DockerHUB..."
-              sh "docker push MosheBittan/$repoName:$apptag"
+              sh "docker push MosheBittan/$appname:$apptag"
               //sh "sleep 180"
                 }
             }
