@@ -52,8 +52,11 @@ podTemplate(cloud: 'kubernetes', containers: [
                         passwordVariable: 'DH_PASS'
                     )
                 ]){
-              echo "Pushing docker image to DockerHUB..."
-              sh "docker push moshebittan/$appname:$apptag"
+                echo "Authenticating with DockerHub..."
+                // ADDED: Secure login using the injected credentials
+                sh "echo \$DH_PASS | docker login -u \$DH_USER --password-stdin"
+                echo "Pushing docker image to DockerHUB..."
+                sh "docker push moshebittan/$appname:$apptag"
               //sh "sleep 180"
                 }
             }
