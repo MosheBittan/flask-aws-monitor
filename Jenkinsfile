@@ -36,8 +36,9 @@ podTemplate(cloud: 'kubernetes', containers: [
         stage('Build') {
             container('docker') {
               echo "Building docker image..."
-              sh "docker build -t $repoName:$apptag ."
-              sh "echo docker push $appimage:$apptag"
+              sh "docker build -t moshebittan/$appname:$apptag ."
+              sh "echo docker push moshebittan/$appname:$apptag"
+                                
               //sh "sleep 180"
             }
         } //end hello
@@ -52,7 +53,7 @@ podTemplate(cloud: 'kubernetes', containers: [
                     )
                 ]){
               echo "Pushing docker image to DockerHUB..."
-              sh "docker push MosheBittan/$appname:$apptag"
+              sh "docker push moshebittan/$appname:$apptag"
               //sh "sleep 180"
                 }
             }
