@@ -50,10 +50,11 @@ podTemplate(cloud: 'kubernetes', containers: [
                         usernameVariable: 'DH_USER', 
                         passwordVariable: 'DH_PASS'
                     )
-                ])
+                ]){
               echo "Pushing docker image to DockerHUB..."
               sh "docker push MosheBittan/$appimage:$apptag"
               //sh "sleep 180"
+                }
             }
         } //end hello
     }
