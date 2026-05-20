@@ -41,7 +41,7 @@ podTemplate(cloud: 'kubernetes', containers: [
                                 
               //sh "sleep 180"
             }
-        } //end hello
+        } //end Build
         
         stage('Push') {
             container('docker') {
@@ -60,6 +60,14 @@ podTemplate(cloud: 'kubernetes', containers: [
               //sh "sleep 180"
                 }
             }
-        } //end hello
+        } //end Push
+
+        stage('Helm') {
+            container('deployer') {
+              echo "Helm chart..."
+              sh "helm template ./chart"                  
+              //sh "sleep 180"
+            }
+        } //end Helm
     }
 }
